@@ -15,9 +15,9 @@ afterAll(() => {
           return request(app)
           .get("/api/categories")
           .expect(200)
-          .then(({body}) => {
+          .then((results) => {
 
-            const categories = body;
+            const categories = results.body.categories;
 
             expect(categories.length).toBe(4);
             categories.forEach((category) => {
