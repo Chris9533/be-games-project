@@ -64,7 +64,7 @@ afterAll(() => {
                 title: expect.any(String),
                 review_body: expect.any(String),
                 designer: expect.any(String),
-                review_img_url: expect.stringMatching("https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png"),
+                review_img_url: expect.any(String),
                 votes: expect.any(Number),
                 category: expect.any(String),
                 owner: expect.any(String),
