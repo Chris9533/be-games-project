@@ -1,5 +1,6 @@
 const express = require("express");
-const { returnCategories, returnReview } = require("./Controllers/controllers.js")
+const { returnCategories } = require("./Controllers/categories.controllers")
+const { returnReview } = require("./Controllers/reviews.controllers")
 
 
 
