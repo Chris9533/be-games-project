@@ -76,7 +76,7 @@ afterAll(() => {
           })
           
       });
-      test('404: responds with message saying route not found when no review with requested id', () => {
+      test('404: responds with message saying review not found when no review with requested id', () => {
           return request(app)
           .get("/api/reviews/28")
           .expect(404)
@@ -97,5 +97,79 @@ afterAll(() => {
           })
           
       });
+      
+  });
+
+  describe.only('PATCH /api/reviews/review_id', () => {
+      test('202: responds with a review with it\'s votes counter altered by the correct amount', () => {
+          const inc_votes = { inc_votes: -5 }
+
+          return request(app)
+          .patch("/api/reviews/2")
+          .send(inc_votes)
+          .expect(202)
+          .then((results) => {
+            const review = results.body.review
+            
+            expect(review.length).toBe(1)
+
+            expect(review[0]).toEqual({
+                review_id: 2,
+                title: 'Jenga',
+                category: 'dexterity',
+                designer: 'Leslie Scott',
+                owner: 'philippaclaire9',
+                review_body: 'Fiddly fun for all the family',
+                review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+                created_at: '2021-01-18T10:01:41.251Z',
+                votes: 0
+              })
+
+          })
+
+          
+      });
+      test('404: responds with message saying review not found when no review with requested id ', () => {
+        const inc_votes = { inc_votes: -5 }
+
+        return request(app)
+        .patch("/api/reviews/87654")
+        .send(inc_votes)
+        .expect(404)
+        .then(({body}) => {
+
+            expect(body.msg).toBe("review not found")
+
+        })
+          
+      });
+      test('400: responds with message saying bad request when review_id is not a number', () => {
+        const inc_votes = { inc_votes: -5 }
+
+        return request(app)
+        .patch("/api/reviews/three")
+        .send(inc_votes)
+        .expect(400)
+        .then(({body}) => {
+
+            expect(body.msg).toBe("bad request")
+          
+      });
+    })
+    test('404 responds with message saying bad request if the value of inc_votes is not a number', () => {
+        const inc_votes = { inc_votes: "Three" }
+
+        return request(app)
+        .patch("/api/reviews/2")
+        .send(inc_votes)
+        .expect(400)
+        .then(({body}) => {
+
+            expect(body.msg).toBe("bad request")
+          
+      });
+        
+    });
+
       
   });

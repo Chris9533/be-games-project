@@ -13,3 +13,12 @@ exports.fetchReview = (review_id) => {
 
     })
 }
+
+exports.updateReview = (newVotes, review_id) => {
+    return db.query("UPDATE reviews SET votes = $1 WHERE review_id = $2 RETURNING *", [newVotes, review_id] )
+    .then((result) => {
+        const review = result.rows
+        return review
+
+    })
+}
