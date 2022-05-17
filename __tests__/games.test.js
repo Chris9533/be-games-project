@@ -3,7 +3,7 @@ const app = require("../app.js")
 const db = require("../db/connection.js")
 const seed = require("../db/seeds/seed")
 const testData = require("../db/data/test-data/index")
-const { query } = require("../db/connection.js")
+
 
 beforeEach(() => seed(testData))
 
@@ -54,22 +54,23 @@ afterAll(() => {
 
             const review = results.body.review
             
+            
          
             expect(review.length).toBe(1)
             
           
 
-            expect(review[0]).toMatchObject({
-                review_id: expect.any(Number),
-                title: expect.any(String),
-                review_body: expect.any(String),
-                designer: expect.any(String),
-                review_img_url: expect.any(String),
-                votes: expect.any(Number),
-                category: expect.any(String),
-                owner: expect.any(String),
-                created_at: expect.any(String)
-            })
+            expect(review[0]).toEqual({
+                review_id: 2,
+                title: 'Jenga',
+                category: 'dexterity',
+                designer: 'Leslie Scott',
+                owner: 'philippaclaire9',
+                review_body: 'Fiddly fun for all the family',
+                review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+                created_at: '2021-01-18T10:01:41.251Z',
+                votes: 5
+              })
 
 
           })
