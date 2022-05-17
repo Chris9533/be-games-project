@@ -95,8 +95,8 @@ afterAll(() => {
   });
 
   describe('PATCH /api/reviews/review_id', () => {
-      test('202: responds with a review with it\'s votes counter altered by the correct amount', () => {
-          const inc_votes = { inc_votes: -5 }
+      test('200: responds with a review with it\'s votes counter altered by the correct amount', () => {
+          const inc_votes = { inc_votes: 50 }
 
           return request(app)
           .patch("/api/reviews/2")
@@ -114,7 +114,7 @@ afterAll(() => {
                 review_body: 'Fiddly fun for all the family',
                 review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
                 created_at: '2021-01-18T10:01:41.251Z',
-                votes: 0
+                votes: 55
               })
 
           })
