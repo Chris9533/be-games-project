@@ -1,6 +1,6 @@
 const express = require("express");
 const { returnCategories } = require("./Controllers/categories.controllers")
-const { returnReview } = require("./Controllers/reviews.controllers")
+const { returnReview, patchReview } = require("./Controllers/reviews.controllers")
 
 
 
@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.get("/api/categories", returnCategories);
 app.get("/api/reviews/:review_id", returnReview)
+app.patch("/api/reviews/:review_id", patchReview)
 
 
 
@@ -21,8 +22,11 @@ app.use("/*", (req, res) => {
   app.use((err, req, res, next) => {
       if(err.code === "22P02") {
           res.status(400).send({ msg: "bad request"})
+      } else if (err.code === '23502' ) {
+        res.status(400).send({ msg: "bad request"})
       } else {
-          next(err);
+        next(err);
+
       }
   })
 
