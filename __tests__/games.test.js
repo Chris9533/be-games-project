@@ -54,13 +54,7 @@ afterAll(() => {
 
             const review = results.body.review
             
-            
-         
-            expect(review.length).toBe(1)
-            
-          
-
-            expect(review[0]).toEqual({
+            expect(review).toEqual({
                 review_id: 2,
                 title: 'Jenga',
                 category: 'dexterity',
@@ -100,20 +94,18 @@ afterAll(() => {
       
   });
 
-  describe.only('PATCH /api/reviews/review_id', () => {
+  describe('PATCH /api/reviews/review_id', () => {
       test('202: responds with a review with it\'s votes counter altered by the correct amount', () => {
           const inc_votes = { inc_votes: -5 }
 
           return request(app)
           .patch("/api/reviews/2")
           .send(inc_votes)
-          .expect(202)
+          .expect(200)
           .then((results) => {
             const review = results.body.review
-            
-            expect(review.length).toBe(1)
 
-            expect(review[0]).toEqual({
+            expect(review).toEqual({
                 review_id: 2,
                 title: 'Jenga',
                 category: 'dexterity',
@@ -156,8 +148,22 @@ afterAll(() => {
           
       });
     })
-    test('404 responds with message saying bad request if the value of inc_votes is not a number', () => {
+    test('400 responds with message saying bad request if the value of inc_votes is not a number', () => {
         const inc_votes = { inc_votes: "Three" }
+
+        return request(app)
+        .patch("/api/reviews/2")
+        .send(inc_votes)
+        .expect(400)
+        .then(({body}) => {
+
+            expect(body.msg).toBe("bad request")
+          
+      });
+        
+    });
+    test('400 responds with message saying bad request if request body does not contain key of inc_votes ', () => {
+        const inc_votes = { votes: 5 }
 
         return request(app)
         .patch("/api/reviews/2")

@@ -8,17 +8,20 @@ exports.fetchReview = (review_id) => {
       if(!review.length) {
           return Promise.reject({ status: 404, msg: "review not found"})
       } else {
-       return review;
+       return review[0];
       }
 
     })
 }
 
-exports.updateReview = (newVotes, review_id) => {
-    return db.query("UPDATE reviews SET votes = $1 WHERE review_id = $2 RETURNING *", [newVotes, review_id] )
+exports.updateReview = (review_id, alterVotes) => {
+    return db.query("UPDATE reviews SET votes = reviews.votes + $1 WHERE review_id = $2 RETURNING *", [alterVotes, review_id] )
     .then((result) => {
         const review = result.rows
-        return review
-
+        if(!review.length) {
+            return Promise.reject({ status: 404, msg: "review not found"})
+        } else {
+         return review[0];
+        }
     })
 }
