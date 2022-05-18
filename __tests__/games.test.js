@@ -230,4 +230,59 @@ afterAll(() => {
       
   });
 
+  describe('GET /api/reviews', () => {
+    test('200: responds with an array of review objects including comment_count', () => {
+        return request(app)
+        .get("/api/reviews")
+        .expect(200)
+        .then((results) => {
+
+          const reviews = results.body.reviews
+
+          expect(reviews.length).toBe(13);
+          reviews.forEach((review) => {
+              expect(review).toMatchObject({
+                review_id: expect.any(Number),
+                title: expect.any(String),
+                category: expect.any(String),
+                owner: expect.any(String),
+                review_img_url: expect.any(String),
+                created_at: expect.any(String),
+                votes: expect.any(Number),
+                comment_count: expect.any(Number)
+              })
+
+          })
+
+        })
+      
+    });
+    test('200: responds with an array of review objects sorted by date in descending order', () => {
+      return request(app)
+      .get("/api/reviews")
+      .expect(200)
+      .then((results) => {
+
+        const reviews = results.body.reviews
+        console.log(reviews)
+
+        expect(reviews.length).toBe(13);
+        expect(reviews).toBeSortedBy("created_at", {descending: true})
+        expect(reviews[0]).toEqual({
+          review_id: 7,
+          title: 'Mollit elit qui incididunt veniam occaecat cupidatat',
+          category: 'social deduction',
+          owner: 'mallionaire',
+          review_img_url: 'https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          created_at: '2021-01-25T11:16:54.963Z',
+          votes: 9,
+          comment_count: 0
+        })
+
+      })
+    
+  });
+    
+  });
+
   
