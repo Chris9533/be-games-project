@@ -285,4 +285,66 @@ afterAll(() => {
     
   });
 
+describe('GET /api/reviews/:review_id/comments', () => {
+  test('200: responds with an array of comments for the given review_id', () => {
+    return request(app)
+        .get("/api/reviews/2/comments")
+        .expect(200)
+        .then((results) => {
+
+          const comments = results.body.comments
+
+          expect(comments.length).toBe(3);
+          comments.forEach((comment) => {
+              expect(comment).toMatchObject({
+                review_id: expect.any(Number),
+                created_at: expect.any(String),
+                votes: expect.any(Number),
+                body: expect.any(String),
+                author: expect.any(String),
+                comment_id: expect.any(Number)
+
+              })
+
+          })
+
+        })
+  });
+  test('200: responds with an empty array if the review exists but there is no comments to show', () => {
+    return request(app)
+    .get("/api/reviews/1/comments")
+    .expect(200)
+    .then((results) => {
+
+      const comments = results.body.comments
+
+      expect(comments).toEqual([]);
+
+    })
+    
+  });
+  test('404: responds with not found if number is valid  but doesn\'t match an Id in path', () => {
+    return request(app)
+    .get("/api/reviews/99/comments")
+    .expect(404)
+    .then(({body}) => {
+
+      expect(body.msg).toBe("review not found")
+
+    })
+    
+  });
+  test('400: responds with bad request if not a number passed as the id', () => {
+    return request(app)
+    .get("/api/reviews/one/comments")
+    .expect(400)
+    .then(({body}) => {
+
+      expect(body.msg).toBe("bad request")
+
+    })
+    
+  });
   
+  
+});  

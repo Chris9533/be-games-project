@@ -1,6 +1,6 @@
 const express = require("express");
 const { returnCategories } = require("./Controllers/categories.controllers")
-const { returnReview, patchReview, returnReviews } = require("./Controllers/reviews.controllers");
+const { returnReview, patchReview, returnReviews, returnComments } = require("./Controllers/reviews.controllers");
 const { returnUsers } = require("./Controllers/users.controllers");
 
 
@@ -13,6 +13,7 @@ app.use(express.json());
 app.get("/api/categories", returnCategories);
 app.get("/api/reviews", returnReviews)
 app.get("/api/reviews/:review_id", returnReview)
+app.get("/api/reviews/:review_id/comments", returnComments)
 app.patch("/api/reviews/:review_id", patchReview)
 app.get("/api/users", returnUsers)
 

@@ -43,3 +43,23 @@ exports.fetchReviews = () => {
     })
     
 }
+
+exports.fetchComments = (review_id) => {
+   const doesReviewExist = db.query("SELECT * FROM reviews WHERE review_id = $1", [review_id])
+   const comments = db.query("SELECT * FROM comments WHERE review_id = $1", [review_id])
+   
+   return Promise.all([comments, doesReviewExist])
+   .then(([comments, doesReviewExist]) => {
+
+    if(!doesReviewExist.rows.length) {
+        return Promise.reject({ status: 404, msg: "review not found"})
+    } else {
+        return comments.rows
+
+    }
+       
+       
+
+   })
+   
+}
