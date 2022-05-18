@@ -54,7 +54,7 @@ afterAll(() => {
 
             const review = results.body.review
             
-            expect(review).toEqual({
+            expect(review).toEqual(expect.objectContaining({
                 review_id: 2,
                 title: 'Jenga',
                 category: 'dexterity',
@@ -64,10 +64,35 @@ afterAll(() => {
                 review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
                 created_at: '2021-01-18T10:01:41.251Z',
                 votes: 5
-              })
+              }))
 
 
           })
+          
+      });
+      test('200: responds with a review object of the review requested with a comment_count key and a value of how many comments reference that review', () => {
+        return request(app)
+        .get("/api/reviews/2")
+        .expect(200)
+        .then((results) => {
+
+          const review = results.body.review
+          
+          expect(review).toEqual({
+              review_id: 2,
+              title: 'Jenga',
+              category: 'dexterity',
+              designer: 'Leslie Scott',
+              owner: 'philippaclaire9',
+              review_body: 'Fiddly fun for all the family',
+              review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+              created_at: '2021-01-18T10:01:41.251Z',
+              votes: 5,
+              comment_count: 3
+            })
+
+
+        })
           
       });
       test('404: responds with message saying review not found when no review with requested id', () => {
@@ -204,3 +229,5 @@ afterAll(() => {
     });
       
   });
+
+  
