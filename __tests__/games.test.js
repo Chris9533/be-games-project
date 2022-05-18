@@ -3,6 +3,7 @@ const app = require("../app.js")
 const db = require("../db/connection.js")
 const seed = require("../db/seeds/seed")
 const testData = require("../db/data/test-data/index")
+require('jest-sorted');
 
 
 beforeEach(() => seed(testData))
@@ -228,6 +229,65 @@ afterAll(() => {
         
     });
       
+  });
+
+  describe.only('GET /api/reviews', () => {
+    test('200: responds with an array of review objects including comment_count', () => {
+        return request(app)
+        .get("/api/reviews")
+        .expect(200)
+        .then((results) => {
+
+          const reviews = results.body.reviews
+
+          expect(reviews.length).toBe(13);
+          reviews.forEach((review) => {
+              expect(review).toMatchObject({
+                review_id: expect.any(Number),
+                title: expect.any(String),
+                category: expect.any(String),
+                designer: expect.any(String),
+                owner: expect.any(String),
+                review_body: expect.any(String),
+                review_img_url: expect.any(String),
+                created_at: expect.any(String),
+                votes: expect.any(Number),
+                comment_count: expect.any(Number)
+              })
+
+          })
+
+        })
+      
+    });
+    test('200: responds with an array of review objects sorted by date in descending order', () => {
+      return request(app)
+      .get("/api/reviews")
+      .expect(200)
+      .then((results) => {
+
+        const reviews = results.body.reviews
+        console.log(reviews)
+
+        expect(reviews.length).toBe(13);
+        expect(reviews).toBeSortedBy("created_at", {descending: true})
+        expect(reviews[0]).toEqual({
+          review_id: 7,
+          title: 'Mollit elit qui incididunt veniam occaecat cupidatat',
+          category: 'social deduction',
+          designer: 'Avery Wunzboogerz',
+          owner: 'mallionaire',
+          review_body: 'Consectetur incididunt aliquip sunt officia. Magna ex nulla consectetur laboris incididunt ea non qui. Enim id eiusmod irure dolor ipsum in tempor consequat amet ullamco. Occaecat fugiat sint fugiat mollit consequat pariatur consequat non exercitation dolore. Labore occaecat in magna commodo anim enim eiusmod eu pariatur ad duis magna. Voluptate ad et dolore ullamco anim sunt do. Qui exercitation tempor in in minim ullamco fugiat ipsum. Duis irure voluptate cupidatat do id mollit veniam culpa. Velit deserunt exercitation amet laborum nostrud dolore in occaecat minim amet nostrud sunt in. Veniam ut aliqua incididunt commodo sint in anim duis id commodo voluptate sit quis.',
+          review_img_url: 'https://images.pexels.com/photos/278888/pexels-photo-278888.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+          created_at: '2021-01-25T11:16:54.963Z',
+          votes: 9,
+          comment_count: 0
+        })
+
+      })
+    
+  });
+    
   });
 
   
