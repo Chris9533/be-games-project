@@ -1,6 +1,6 @@
 const express = require("express");
 const { returnCategories } = require("./Controllers/categories.controllers")
-const { returnReview, patchReview, returnReviews, returnComments } = require("./Controllers/reviews.controllers");
+const { returnReview, patchReview, returnReviews, returnComments, postComment } = require("./Controllers/reviews.controllers");
 const { returnUsers } = require("./Controllers/users.controllers");
 
 
@@ -14,8 +14,12 @@ app.get("/api/categories", returnCategories);
 app.get("/api/reviews", returnReviews)
 app.get("/api/reviews/:review_id", returnReview)
 app.get("/api/reviews/:review_id/comments", returnComments)
-app.patch("/api/reviews/:review_id", patchReview)
 app.get("/api/users", returnUsers)
+
+app.post("/api/reviews/:review_id/comments", postComment)
+
+app.patch("/api/reviews/:review_id", patchReview)
+
 
 
 
@@ -29,6 +33,9 @@ app.use("/*", (req, res) => {
           res.status(400).send({ msg: "bad request"})
       } else if (err.code === '23502' ) {
         res.status(400).send({ msg: "bad request"})
+      } else if (err.code === '23503'){
+        res.status(404).send({ msg: "not found"})
+
       } else {
         next(err);
 
