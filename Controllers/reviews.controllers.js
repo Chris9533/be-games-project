@@ -1,4 +1,3 @@
-const res = require("express/lib/response")
 const { fetchReview, updateReview, fetchReviews } = require("../Models/reviews.models")
 
 exports.returnReview = (req, res, next) => {
@@ -7,6 +6,7 @@ exports.returnReview = (req, res, next) => {
 fetchReview(review_id).then((review) => {
 res.status(200).send({ review })
 }).catch((err) => {
+    console.log(err)
 next(err)
 })
 }
