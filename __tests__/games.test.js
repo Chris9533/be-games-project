@@ -36,8 +36,8 @@ afterAll(() => {
           return request(app)
           .get("/api/apples")
           .expect(404)
-          .then(({body}) => {
-              expect(body.msg).toBe("route not found")
+          .then((results) => {
+              expect(results.body.msg).toBe("route not found")
 
           })
           
@@ -99,19 +99,19 @@ afterAll(() => {
           return request(app)
           .get("/api/reviews/28")
           .expect(404)
-          .then(({body}) => {
+          .then((results) => {
 
           
-          expect(body.msg).toBe("review not found")
+          expect(results.body.msg).toBe("review not found")
         })
       });
       test('400: responds with a message saying bad request if review_id is of the wrong data type', () => {
           return request(app)
           .get("/api/reviews/six")
           .expect(400)
-          .then(({body}) => {
+          .then((results) => {
 
-            expect(body.msg).toBe("bad request")
+            expect(results.body.msg).toBe("bad request")
 
           })
           
@@ -153,9 +153,9 @@ afterAll(() => {
         .patch("/api/reviews/87654")
         .send(inc_votes)
         .expect(404)
-        .then(({body}) => {
+        .then((results) => {
 
-            expect(body.msg).toBe("review not found")
+            expect(results.body.msg).toBe("review not found")
 
         })
           
@@ -167,9 +167,9 @@ afterAll(() => {
         .patch("/api/reviews/three")
         .send(inc_votes)
         .expect(400)
-        .then(({body}) => {
+        .then((results) => {
 
-            expect(body.msg).toBe("bad request")
+            expect(results.body.msg).toBe("bad request")
           
       });
     })
@@ -180,9 +180,9 @@ afterAll(() => {
         .patch("/api/reviews/2")
         .send(inc_votes)
         .expect(400)
-        .then(({body}) => {
+        .then((results) => {
 
-            expect(body.msg).toBe("bad request")
+            expect(results.body.msg).toBe("bad request")
           
       });
         
@@ -194,9 +194,9 @@ afterAll(() => {
         .patch("/api/reviews/2")
         .send(inc_votes)
         .expect(400)
-        .then(({body}) => {
+        .then((results) => {
 
-            expect(body.msg).toBe("bad request")
+            expect(results.body.msg).toBe("bad request")
           
       });
         
@@ -264,7 +264,7 @@ afterAll(() => {
       .then((results) => {
 
         const reviews = results.body.reviews
-        console.log(reviews)
+     
 
         expect(reviews.length).toBe(13);
         expect(reviews).toBeSortedBy("created_at", {descending: true})
@@ -327,9 +327,9 @@ describe('GET /api/reviews/:review_id/comments', () => {
     return request(app)
     .get("/api/reviews/99/comments")
     .expect(404)
-    .then(({body}) => {
+    .then((results) => {
 
-      expect(body.msg).toBe("review not found")
+      expect(results.body.msg).toBe("review not found")
 
     })
     
@@ -338,9 +338,9 @@ describe('GET /api/reviews/:review_id/comments', () => {
     return request(app)
     .get("/api/reviews/one/comments")
     .expect(400)
-    .then(({body}) => {
+    .then((results) => {
 
-      expect(body.msg).toBe("bad request")
+      expect(results.body.msg).toBe("bad request")
 
     })
     
