@@ -257,7 +257,7 @@ afterAll(() => {
         })
       
     });
-    test('200: responds with an array of review objects sorted by date in descending order', () => {
+    test('200: responds with an array of review objects sorted by date in descending order by default', () => {
       return request(app)
       .get("/api/reviews")
       .expect(200)
@@ -282,7 +282,155 @@ afterAll(() => {
       })
     
   });
+  test('200: responds with an array of review objects sorted by other valid collums', () => {
+    return request(app)
+    .get("/api/reviews?sort_by=votes")
+    .expect(200)
+    .then((results) => {
+
+      const reviews = results.body.reviews
+     
+   
+
+      expect(reviews.length).toBe(13);
+      expect(reviews).toBeSortedBy("votes", {descending: true})
+      expect(reviews[0]).toEqual({
+        review_id: 12,
+        title: "Scythe; you're gonna need a bigger table!",
+        owner: 'mallionaire',
+        review_img_url: 'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
+        category: 'social deduction',
+        created_at: '2021-01-22T10:37:04.839Z',
+        votes: 100,
+        comment_count: 0
+      })
+      
+    })
+  
+});
+test('200: As well as sorting user should be able to choose the order in which the data is returned', () => {
+  return request(app)
+  .get("/api/reviews?sort_by=votes&order=ASC")
+  .expect(200)
+  .then((results) => {
+
+    const reviews = results.body.reviews
+   
+
+    expect(reviews.length).toBe(13);
+    expect(reviews).toBeSortedBy("votes")
+    expect(reviews[0]).toEqual({
+      review_id: 1,
+      title: 'Agricola',
+      owner: 'mallionaire',
+      review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+      category: 'euro game',
+      created_at: '2021-01-18T10:00:20.514Z',
+      votes: 1,
+      comment_count: 0
+    })
     
+  })
+
+});
+test('200: returns an array of objects filtered by a valid category', () => {
+  return request(app)
+  .get("/api/reviews?category=social deduction")
+  .expect(200)
+  .then((results) => {
+
+    const reviews = results.body.reviews
+    
+
+    expect(reviews.length).toBe(11);
+    reviews.forEach((review) => {
+      expect(review).toMatchObject({
+        review_id: expect.any(Number),
+        title: expect.any(String),
+        category: "social deduction",
+        owner: expect.any(String),
+        review_img_url: expect.any(String),
+        created_at: expect.any(String),
+        votes: expect.any(Number),
+        comment_count: expect.any(Number)
+      })
+
+  })
+    
+  })
+
+});
+test('200: sort_by order and category querys can all be put in one request and return an array of objects', () => {
+  return request(app)
+  .get("/api/reviews?sort_by=votes&order=ASC&category=social deduction")
+  .expect(200)
+  .then((results) => {
+
+    const reviews = results.body.reviews
+
+    expect(reviews.length).toBe(11);
+    expect(reviews).toBeSortedBy("votes")
+    expect(reviews[0]).toEqual({
+      review_id: 3,
+      title: 'Ultimate Werewolf',
+      owner: 'bainesface',
+      review_img_url: 'https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png',
+      category: 'social deduction',
+      created_at: '2021-01-18T10:01:41.251Z',
+      votes: 5,
+      comment_count: 3
+    })
+    
+  })
+
+});
+test('200: responds with an empty array if the category exists but no reviews are associated with it', () => {
+  return request(app)
+  .get("/api/reviews?category=children's games")
+  .expect(200)
+  .then((results) => {
+
+    const reviews = results.body.reviews
+    
+
+    expect(reviews).toEqual([]);
+    
+  })
+
+});
+test('400: responds with bad request if sort_by is not valid', () => {
+  return request(app)
+  .get("/api/reviews?sort_by=apples")
+  .expect(400)
+  .then((results) => {
+
+    expect(results.body.msg).toBe("bad request")
+
+  })
+  
+});
+test('400: responds with bad request if order is not valid', () => {
+  return request(app)
+  .get("/api/reviews?sort_by=votes&order=any")
+  .expect(400)
+  .then((results) => {
+
+    expect(results.body.msg).toBe("bad request")
+
+  })
+  
+});
+test('404: responds with not found if category doesn\'t exist', () => {
+  return request(app)
+  .get("/api/reviews?sort_by=votes&order=ASC&category=unknown")
+  .expect(404)
+  .then((results) => {
+
+    expect(results.body.msg).toBe("not found")
+
+  })
+  
+});
   });
 
 describe('GET /api/reviews/:review_id/comments', () => {
