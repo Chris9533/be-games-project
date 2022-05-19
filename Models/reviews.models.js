@@ -30,8 +30,32 @@ exports.updateReview = (review_id, alterVotes) => {
     })
 }
 
-exports.fetchReviews = () => {
-    return db.query("SELECT reviews.review_id, reviews.title, reviews.owner, reviews.review_img_url, reviews.category, reviews.created_at, reviews.votes, COUNT(comments.review_id)::INT AS comment_count FROM reviews LEFT JOIN comments ON reviews.review_id = comments.review_id GROUP BY reviews.review_id ORDER BY created_at  DESC")
+exports.fetchReviews = (sort_by = "created_at", order = "DESC", category) => {
+    let validSortBy = ["review_id", "created_at", "votes", "comment_count"]
+    let validOrder = ["ASC", "DESC"]
+    let validCategory = ["euro game", "dexterity", "social deduction"]
+    
+    let queryStr = "SELECT reviews.review_id, reviews.title, reviews.owner, reviews.review_img_url, reviews.category, reviews.created_at, reviews.votes, COUNT(comments.review_id)::INT AS comment_count FROM reviews LEFT JOIN comments ON reviews.review_id = comments.review_id"
+
+    queryVals = []
+
+    if(validCategory.includes(category)) {
+        queryStr += ` WHERE category = $1 GROUP BY reviews.review_id`
+        queryVals.push(category)
+    } else if (category) {
+        return Promise.reject({ status: 404, msg: "not found"})
+    } else {
+        queryStr += " GROUP BY reviews.review_id"
+    }
+    if(validSortBy.includes(sort_by) && validOrder.includes(order)) {
+    queryStr += ` ORDER BY ${sort_by}`
+    queryStr += ` ${order}`
+    } else {
+        return Promise.reject({ status: 400, msg: "bad request"})
+    }
+    
+
+    return db.query(queryStr, queryVals)
     .then((results) => {
 
     const reviews = results.rows
