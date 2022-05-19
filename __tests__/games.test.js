@@ -615,7 +615,6 @@ describe('GET /api', () => {
     .expect(200)
     .then((results) => {
       const endpoints = results.body
-      console.log(endpoints)
 
       expect(endpoints).toEqual(expect.objectContaining({
         "GET /api": {
