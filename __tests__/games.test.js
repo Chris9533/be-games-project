@@ -411,5 +411,18 @@ describe('POST /api/reviews/review_id/comments ', () => {
 
     })
   });
+  test('400: responds with bad request if not a number passed as the id', () => {
+    const data = { username: "Gandhi", body: "it was great" }
+    return request(app)
+    .post("/api/reviews/two/comments")
+    .send(data)
+    .expect(400)
+    .then((results) => {
+
+      expect(results.body.msg).toBe("bad request")
+
+    })
+    
+  });
   
 });  
