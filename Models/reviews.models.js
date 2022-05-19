@@ -55,11 +55,15 @@ exports.fetchComments = (review_id) => {
         return Promise.reject({ status: 404, msg: "review not found"})
     } else {
         return comments.rows
-
     }
-       
-       
+   })   
+}
 
-   })
+exports.insertComment = (review_id, username, body) => {
+    return db.query("INSERT INTO comments (review_id, author, body) VALUES ($1, $2, $3) RETURNING *", [review_id, username, body])
+    .then((results) => {
+        return results.rows[0];
+
+    })
    
 }

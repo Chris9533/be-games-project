@@ -1,4 +1,4 @@
-const { fetchReview, updateReview, fetchReviews, fetchComments } = require("../Models/reviews.models")
+const { fetchReview, updateReview, fetchReviews, fetchComments, insertComment } = require("../Models/reviews.models")
 
 exports.returnReview = (req, res, next) => {
     const review_id = req.params.review_id
@@ -45,5 +45,19 @@ exports.returnComments = (req, res, next) => {
     })
     .catch((err) => {
 next(err)
+    })
+}
+
+exports.postComment = (req, res, next) => {
+    const { username, body } = req.body
+    const { review_id } = req.params
+    
+    insertComment(review_id, username, body)
+    .then((comment) => {
+        res.status(201).send({comment})
+
+    })
+    .catch((err) => {
+        next(err)
     })
 }

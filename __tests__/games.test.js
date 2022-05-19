@@ -347,4 +347,82 @@ describe('GET /api/reviews/:review_id/comments', () => {
   });
   
   
+});
+describe('POST /api/reviews/review_id/comments ', () => {
+  test('201: responds with the newly created comment', () => {
+    const data = { username: "mallionaire", body: "it was great" }
+  
+    return request(app)
+    .post("/api/reviews/2/comments")
+    .send(data)
+    .expect(201)
+    .then((results) => {
+      const comment = results.body.comment
+  
+      expect(comment).toEqual({
+        body: 'it was great',
+        votes: 0,
+        author: 'mallionaire',
+        review_id: 2,
+        created_at: expect.any(String),
+        comment_id: 7
+      })
+  
+    })
+  
+    
+  });
+  test('400 responds with a message saying bad request if body does not contain both mandatory keys', () => {
+    const data = { username: "mallionaire" }
+  
+    return request(app)
+    .post("/api/reviews/2/comments")
+    .send(data)
+    .expect(400)
+    .then((results) => {
+
+      expect(results.body.msg).toBe("bad request")
+
+    })
+  });
+  test('404 responds with a message saying not found if review_id in path does not exist', () => {
+    const data = { username: "mallionaire", body: "it was great" }
+  
+    return request(app)
+    .post("/api/reviews/95/comments")
+    .send(data)
+    .expect(404)
+    .then((results) => {
+
+      expect(results.body.msg).toBe("not found")
+
+    })
+  });
+  test('404 responds with message saying not found if username does not exist on the database', () => {
+    const data = { username: "Gandhi", body: "it was great" }
+  
+    return request(app)
+    .post("/api/reviews/2/comments")
+    .send(data)
+    .expect(404)
+    .then((results) => {
+
+      expect(results.body.msg).toBe("not found")
+
+    })
+  });
+  test('400: responds with bad request if not a number passed as the id', () => {
+    const data = { username: "Gandhi", body: "it was great" }
+    return request(app)
+    .post("/api/reviews/two/comments")
+    .send(data)
+    .expect(400)
+    .then((results) => {
+
+      expect(results.body.msg).toBe("bad request")
+
+    })
+    
+  });
+  
 });  
