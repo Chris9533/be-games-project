@@ -31,9 +31,9 @@ exports.updateReview = (review_id, alterVotes) => {
 }
 
 exports.fetchReviews = (sort_by = "created_at", order = "DESC", category) => {
-    let validSortBy = ["review_id", "created_at", "votes", "comment_count"]
-    let validOrder = ["ASC", "DESC"]
-    let validCategory = ["euro game", "dexterity", "social deduction"]
+    const validSortBy = ["review_id", "created_at", "votes", "comment_count"]
+    const validOrder = ["ASC", "DESC"]
+    const validCategory = ["euro game", "dexterity", "social deduction", "children's games"]
     
     let queryStr = "SELECT reviews.review_id, reviews.title, reviews.owner, reviews.review_img_url, reviews.category, reviews.created_at, reviews.votes, COUNT(comments.review_id)::INT AS comment_count FROM reviews LEFT JOIN comments ON reviews.review_id = comments.review_id"
 

@@ -384,6 +384,20 @@ test('200: sort_by order and category querys can all be put in one request and r
   })
 
 });
+test('200: responds with an empty array if the category exists but no reviews are associated with it', () => {
+  return request(app)
+  .get("/api/reviews?category=children's games")
+  .expect(200)
+  .then((results) => {
+
+    const reviews = results.body.reviews
+    
+
+    expect(reviews).toEqual([]);
+    
+  })
+
+});
 test('400: responds with bad request if sort_by is not valid', () => {
   return request(app)
   .get("/api/reviews?sort_by=apples")
