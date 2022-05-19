@@ -3,6 +3,7 @@ const { returnCategories } = require("./Controllers/categories.controllers");
 const { removeComment } = require("./Controllers/comments.controllers");
 const { returnReview, patchReview, returnReviews, returnComments, postComment } = require("./Controllers/reviews.controllers");
 const { returnUsers } = require("./Controllers/users.controllers");
+const endPoints = require("./endpoints.json")
 
 
 
@@ -10,6 +11,9 @@ const { returnUsers } = require("./Controllers/users.controllers");
 const app = express();
 app.use(express.json());
 
+app.get("/api", (req, res) => {
+res.status(200).send(endPoints)
+});
 
 app.get("/api/categories", returnCategories);
 app.get("/api/reviews", returnReviews)
