@@ -607,3 +607,141 @@ describe('DELETE /api/comments/:comment_id', () => {
     
   });
 });
+
+describe('GET /api', () => {
+  test('200: responds with a JSON describing all available endpoints on the api', () => {
+    return request(app)
+    .get("/api")
+    .expect(200)
+    .then((results) => {
+      const endpoints = results.body
+
+      expect(endpoints).toEqual(expect.objectContaining({
+        "GET /api": {
+          "description": "serves up a json representation of all the available endpoints of the api"
+        },
+        "GET /api/categories": {
+          "description": "serves an array of all categories",
+          "queries": [],
+          "exampleResponse": {
+            "categories": [
+              {
+                "description": "Players attempt to uncover each other's hidden role",
+                "slug": "Social deduction"
+              }
+            ]
+          }
+        },
+        "GET /api/reviews": {
+          "description": "serves an array of all reviews",
+          "queries": ["category", "sort_by", "order"],
+          "exampleResponse": {
+            "reviews": [
+              {
+                "title": "One Night Ultimate Werewolf",
+                "designer": "Akihisa Okui",
+                "owner": "happyamy2016",
+                "review_img_url": "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "category": "hidden-roles",
+                "created_at": 1610964101251,
+                "votes": 5
+              }
+            ]
+          }
+        },
+        "GET /api/reviews/:review_id": {
+          "description": "serves an object of the requested review",
+          "queries": [],
+          "exampleResponse": {
+            "review": 
+              {
+                "title": "One Night Ultimate Werewolf",
+                "designer": "Akihisa Okui",
+                "owner": "happyamy2016",
+                "review_img_url": "https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                "category": "hidden-roles",
+                "created_at": 1610964101251,
+                "votes": 5
+              }
+          }
+        },
+        "GET /api/reviews/:review_id/comments": {
+          "description": "serves an array of comments that matches the review_id",
+          "queries": [],
+          "exampleResponse": {
+            "comments": [
+              {
+                "body": "I loved this game too!",
+                "votes": 16,
+                "author": "bainesface",
+                "review_id": 2,
+                "created_at": "new Date(1511354613389)",
+                "comment_id": 1
+              }
+            ]
+          }
+        },
+        "GET /api/users": {
+          "description": "serves an array of users",
+          "queries": [],
+          "exampleResponse": {
+            "users": [
+              {
+                "username": "mallionaire",
+                "name": "haz",
+                "avatar_url":
+                  "https://www.healthytherapies.com/wp-content/uploads/2016/06/Lime3.jpg"
+              }
+            ]
+          }
+        },
+        "POST /api/reviews/:review_id/comments": {
+          "description": "adds a new comment to the database and responds with the newly created comment",
+          "queries": [],
+          "exampleResponse": {
+            "comment": 
+              {
+                "body": "It was great",
+                "votes": 0,
+                "author": "bainesface",
+                "review_id": 2,
+                "created_at": "new Date(1511354613389)",
+                "comment_id": 17
+              }
+            
+          }
+        },
+        "PATCH /api/reviews/:review_id": {
+          "description": "alters the votes in the requested reviews by what the user has requested and then responds with the updated review",
+          "queries": [],
+          "exampleResponse": {
+            "comment": {
+              "review_id": 2,
+              "title": "Jenga",
+              "category": "dexterity",
+              "designer": "Leslie Scott",
+              "owner": "philippaclaire9",
+              "review_body": "Fiddly fun for all the family",
+              "review_img_url": "https://www.golenbock.com/wp-content/uploads/2015/01/placeholder-user.png",
+              "created_at": "2021-01-18T10:01:41.251Z",
+              "votes": 55
+            }
+          }
+        },
+        "DELETE /api/comments/:comment_id": {
+          "description": "deletes the comment specified by the user and rsponds with an empty object",
+          "queries": [],
+          "exampleResponse": {
+      
+            "response" : {}
+           
+          }
+        }
+      }))
+
+
+    })
+    
+  });
+  
+});
