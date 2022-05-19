@@ -573,4 +573,37 @@ describe('POST /api/reviews/review_id/comments ', () => {
     
   });
   
-});  
+});
+
+describe('DELETE /api/comments/:comment_id', () => {
+  test('204: responds with correct status code and an empty body', () => {
+    return request(app)
+    .delete("/api/comments/1")
+    .expect(204)
+    .then((results) => {
+      expect(results.body).toEqual({})
+
+    })
+    
+  });
+  test('404: responds with message saying comment not found if comment_id doesn\'t exist', () => {
+    return request(app)
+    .delete("/api/comments/967")
+    .expect(404)
+    .then((results) => {
+      expect(results.body.msg).toBe("comment not found")
+
+    })
+    
+  });
+  test('400: responds with message saying bad request if comment_id is not a number', () => {
+    return request(app)
+    .delete("/api/comments/two")
+    .expect(400)
+    .then((results) => {
+      expect(results.body.msg).toBe("bad request")
+
+    })
+    
+  });
+});
