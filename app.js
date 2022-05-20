@@ -1,9 +1,5 @@
 const express = require("express");
-const { returnCategories } = require("./Controllers/categories.controllers");
-const { removeComment } = require("./Controllers/comments.controllers");
-const { returnReview, patchReview, returnReviews, returnComments, postComment } = require("./Controllers/reviews.controllers");
-const { returnUsers } = require("./Controllers/users.controllers");
-const endPoints = require("./endpoints.json")
+const apiRouter = require('./routes/api-router');
 
 
 
@@ -11,25 +7,7 @@ const endPoints = require("./endpoints.json")
 const app = express();
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-res.status(200).send(endPoints)
-});
-
-app.get("/api/categories", returnCategories);
-app.get("/api/reviews", returnReviews)
-app.get("/api/reviews/:review_id", returnReview)
-app.get("/api/reviews/:review_id/comments", returnComments)
-app.get("/api/users", returnUsers)
-
-app.post("/api/reviews/:review_id/comments", postComment)
-
-app.patch("/api/reviews/:review_id", patchReview)
-
-app.delete("/api/comments/:comment_id", removeComment)
-
-
-
-
+app.use('/api', apiRouter);
 
 app.use("/*", (req, res) => {
     res.status(404).send({ msg: "route not found" });
