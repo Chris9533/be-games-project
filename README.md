@@ -7,7 +7,7 @@ This is my backend API which has the purpose of accessing application data and p
 
 ## Link to hosted Version
 
-https://mysterious-dusk-03964.herokuapp.com/
+Link to hosted version [here](https://mysterious-dusk-03964.herokuapp.com/api)
 
 ## Setup
 
@@ -18,7 +18,7 @@ https://mysterious-dusk-03964.herokuapp.com/
 
 In your CLI run the command :
 
- gh repo clone Chris9533/be-games-project
+ `git clone https://github.com/Chris9533/be-games-project.git`
 
  ### Install Dependencies 
 
@@ -26,7 +26,7 @@ In your CLI run the command :
 
  In the root of your cloned repository run the command :
 
- npm install
+ `npm install`
 
  - For a list of the dependencies being used check the package.json file
 
@@ -41,13 +41,13 @@ Two files will need to be created in order for psql to be able to connect to the
 
  After this you will need to create your databases and seed them with data.
 
- -To create your databases run the command:
+ 1.To create your databases run the command:
 
- npm run setup-dbs
+ `npm run setup-dbs`
 
- -After this to seed your databases run the command:
+ 2.After this to seed your databases run the command:
 
- npm run seed
+ `npm run seed`
 
  ## Using the API
 
@@ -56,11 +56,11 @@ Two files will need to be created in order for psql to be able to connect to the
 
  -To run the test suite use the command:
 
- npm test
+ `npm test`
 
  This will run all the tests in the __tests__ folder. You can specify which test file you would like to run by specifying the path.
 
- E.g- npm test ./__tests__/utils.test.js
+ E.g- `npm test ./__tests__/utils.test.js`
 
 
  ## External application requests
@@ -69,7 +69,7 @@ Two files will need to be created in order for psql to be able to connect to the
 
  -First you will need to make the API listen for requests by running the command:
 
- npm run start
+ `npm run start`
 
  -Now you can make requests using insomnia and the correct port key which is set to 9090:
 
