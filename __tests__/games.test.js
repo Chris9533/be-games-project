@@ -745,3 +745,34 @@ describe('GET /api', () => {
   });
   
 });
+
+describe('GET /api/users/:username', () => {
+  test('200: responds with an object of the user requested', () => {
+    return request(app)
+    .get("/api/users/philippaclaire9")
+    .expect(200)
+    .then((results) => {
+
+      const user = results.body.user;
+
+      expect(user).toEqual({
+        username: 'philippaclaire9',
+        name: 'philippa',
+        avatar_url: 'https://avatars2.githubusercontent.com/u/24604688?s=460&v=4'
+      });
+      
+
+    })
+  });
+  test('404: responds with message saying not found if username doesn\'t exist', () => {
+    return request(app)
+    .get("/api/users/darthVader")
+    .expect(404)
+    .then((results) => {
+      expect(results.body.msg).toBe("user not found")
+
+    })
+    
+  });
+  
+});
