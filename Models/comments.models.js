@@ -15,3 +15,16 @@ exports.deleteComment = (comment_id) => {
 
  })
 }
+
+exports.updateComment = (inc_votes, comment_id) => {
+    return db.query("UPDATE comments SET votes = comments.votes + $1 WHERE comment_id = $2 RETURNING *", [inc_votes, comment_id])
+    .then((results) => {
+        
+        if(!results.rows.length) {
+            return Promise.reject({ status: 404, msg: "comment not found"})
+        } else {
+        return results.rows[0];
+        }
+
+    })
+}

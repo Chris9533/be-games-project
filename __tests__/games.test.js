@@ -776,3 +776,83 @@ describe('GET /api/users/:username', () => {
   });
   
 });
+
+describe('PATCH /api/comments/:comment_id', () => {
+  test('should ', () => {
+    const inc_votes = { inc_votes: 50 }
+
+          return request(app)
+          .patch("/api/comments/2")
+          .send(inc_votes)
+          .expect(200)
+          .then((results) => {
+            const comment = results.body.comment
+
+            expect(comment).toEqual({
+              comment_id: 2,
+              body: 'My dog loved this game too!',
+              review_id: 3,
+              author: 'mallionaire',
+              votes: 63,
+              created_at: "2021-01-18T10:09:05.410Z"
+            })
+
+          })
+  });
+  test('404: responds with message saying comment not found when no comments with requested id ', () => {
+    const inc_votes = { inc_votes: -5 }
+
+    return request(app)
+    .patch("/api/comments/87654")
+    .send(inc_votes)
+    .expect(404)
+    .then((results) => {
+
+        expect(results.body.msg).toBe("comment not found")
+
+    })
+      
+  });
+  test('400: responds with message saying bad request when comment_id is not a number', () => {
+    const inc_votes = { inc_votes: -5 }
+
+    return request(app)
+    .patch("/api/comments/three")
+    .send(inc_votes)
+    .expect(400)
+    .then((results) => {
+
+        expect(results.body.msg).toBe("bad request")
+      
+  });
+})
+test('400 responds with message saying bad request if the value of inc_votes is not a number', () => {
+    const inc_votes = { inc_votes: "Three" }
+
+    return request(app)
+    .patch("/api/comments/2")
+    .send(inc_votes)
+    .expect(400)
+    .then((results) => {
+
+        expect(results.body.msg).toBe("bad request")
+      
+  });
+    
+});
+test('400 responds with message saying bad request if request body does not contain key of inc_votes ', () => {
+    const inc_votes = { votes: 5 }
+
+    return request(app)
+    .patch("/api/reviews/2")
+    .send(inc_votes)
+    .expect(400)
+    .then((results) => {
+
+        expect(results.body.msg).toBe("bad request")
+      
+  });
+    
+});
+  
+});
