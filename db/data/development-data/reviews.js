@@ -31,7 +31,7 @@ module.exports = [
       'https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Try to trick your friends. If you find yourself being dealt the Chamelean card then the aim of the game is simple; blend in... Meanwhile the other players aim to be as vague as they can to not give the game away ',
-    category: 'hidden roles',
+    category: 'hidden-roles',
     created_at: new Date(1610964102151),
     votes: 5
   },
@@ -42,7 +42,7 @@ module.exports = [
     review_img_url:
       'https://images.pexels.com/photos/5350049/pexels-photo-5350049.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body: "We couldn't find the werewolf!",
-    category: 'hidden roles',
+    category: 'hidden-roles',
     created_at: new Date(1610964101251),
     votes: 5
   },
@@ -54,7 +54,7 @@ module.exports = [
       'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
     review_body:
       "Ever wish you could try your hand at mixing potions? Quacks of Quedlinburg will have you mixing up a homebrew like no other. Each player buys different ingredients (chips) that are drawn at random to reach the most points, but watch out, you'd better not let your cauldrom explode.",
-    category: 'push your luck',
+    category: 'push-your-luck',
     created_at: new Date(1610964101251),
     votes: 10
   },
@@ -66,7 +66,7 @@ module.exports = [
       'https://images.pexels.com/photos/258045/pexels-photo-258045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Cold rain pours on the faces of your team of cyclists, you pulled to the front of the pack early and now your taking on exhaustion cards like there is not tomorrow, you think there are about 2 hands left until you cross the finish line, will you draw enough from your deck to cross before the other team shoot passed? Flamee Rouge is a Racing deck management game where you carefully manage your deck in order to cross the line before your opponents, cyclist can fall slyly behind front runners in their slipstreams to save precious energy for the prefect moment to burst into the lead ',
-    category: 'deck building',
+    category: 'deck-building',
     created_at: new Date(1610964101251),
     votes: 10
   },
@@ -78,7 +78,7 @@ module.exports = [
       'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
     review_body:
       "If you've ever wanted to accuse your siblings, cousins or friends of being part of a plot to murder everyone whilst secretly choosing which one of them should get the chop next - this is the boardgame for you. Buyer beware: once you gain a reputation for being able to lie with a stone face about being the secret killer you may never lose it.",
-    category: 'hidden roles',
+    category: 'hidden-roles',
     created_at: new Date(1610964101251),
     votes: 8
   },
@@ -90,7 +90,7 @@ module.exports = [
       'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
     review_body:
       'Spend 30 minutes just setting up all of the boards (!) meeple and decks, just to forget how to play. Scythe can be a lengthy game but really packs a punch if you put the time in. With beautiful artwork, countless scenarios and clever game mechanics, this board game is a must for any board game fanatic; just make sure you explain ALL the rules before you start playing with first timers or you may find they bring it up again and again.',
-    category: 'engine building',
+    category: 'engine-building',
     created_at: new Date(1611311824839),
     votes: 100
   },
@@ -126,7 +126,7 @@ module.exports = [
       'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
     review_body:
       'Labore occaecat sunt qui commodo anim anim aliqua adipisicing aliquip fugiat. Ad in ipsum incididunt esse amet deserunt aliqua exercitation occaecat nostrud irure labore ipsum. Culpa tempor non voluptate reprehenderit deserunt pariatur cupidatat aliqua adipisicing. Nostrud labore dolor fugiat sint consequat excepteur dolore irure eu. Anim ex adipisicing magna deserunt enim fugiat do nulla officia sint. Ex tempor ut aliquip exercitation eiusmod. Excepteur deserunt officia voluptate sunt aliqua esse deserunt velit. In id non proident veniam ipsum id in consequat duis ipsum et incididunt. Qui cupidatat ea deserunt magna proident nisi nulla eiusmod aliquip magna deserunt fugiat fugiat incididunt. Laboris nisi velit mollit ullamco deserunt eiusmod deserunt ea dolore veniam.',
-    category: 'engine building',
+    category: 'engine-building',
     created_at: new Date(1610010368077),
     votes: 5
   },
@@ -138,7 +138,7 @@ module.exports = [
       'https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Fugiat fugiat enim officia laborum quis. Aliquip laboris non nulla nostrud magna exercitation in ullamco aute laborum cillum nisi sint. Culpa excepteur aute cillum minim magna fugiat culpa adipisicing eiusmod laborum ipsum fugiat quis. Mollit consectetur amet sunt ex amet tempor magna consequat dolore cillum adipisicing. Proident est sunt amet ipsum magna proident fugiat deserunt mollit officia magna ea pariatur. Ullamco proident in nostrud pariatur. Minim consequat pariatur id pariatur adipisicing.',
-    category: 'roll and write',
+    category: 'roll-and-write',
     created_at: new Date(1600010368077),
     votes: 8
   },
@@ -162,7 +162,7 @@ module.exports = [
       'https://images.pexels.com/photos/163064/play-stone-network-networked-interactive-163064.jpeg',
     review_body:
       'Nostrud anim cupidatat incididunt officia cupidatat magna. Cillum commodo voluptate laboris id incididunt esse elit ipsum consectetur non elit elit magna. Aliquip sint amet eiusmod magna. Fugiat non ut ex eiusmod elit. Esse anim irure laborum aute ut ad reprehenderit. Veniam laboris dolore mollit mollit in. Cillum in aliquip adipisicing ipsum et dolor veniam qui ut ullamco aliquip in. Dolor fugiat elit laborum elit cupidatat aute qui nostrud. Duis incididunt ea nostrud minim consequat. Reprehenderit mollit cupidatat do culpa aliqua culpa mollit minim eiusmod. Deserunt occaecat ipsum ex ut pariatur eu veniam cillum nulla ex nostrud. Do nostrud amet duis proident nostrud eiusmod occaecat reprehenderit. Quis et cupidatat tempor qui dolor id veniam in sunt ipsum eiusmod. Sint tempor commodo consectetur mollit proident culpa nulla est tempor ullamco tempor aliquip laboris.',
-    category: 'hidden roles',
+    category: 'hidden-roles',
     created_at: new Date(1612524446563),
     votes: 3
   },
@@ -186,7 +186,7 @@ module.exports = [
       'https://images.pexels.com/photos/4691567/pexels-photo-4691567.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Choo-chooing onto game tables and zooming its way to becoming a modern classic. Ticket To Ride is rich with trains, tickets and tactics. Players gather train cards to enable then to build routes across a North American map, joining big cities and trying not to get blocked by their opponent ',
-    category: 'deck building',
+    category: 'deck-building',
     created_at: new Date(1611313505936),
     votes: 1
   },
@@ -222,7 +222,7 @@ module.exports = [
       'https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Fugiat fugiat enim officia laborum quis. Aliquip laboris non nulla nostrud magna exercitation in ullamco aute laborum cillum nisi sint. Culpa excepteur aute cillum minim magna fugiat culpa adipisicing eiusmod laborum ipsum fugiat quis. Mollit consectetur amet sunt ex amet tempor magna consequat dolore cillum adipisicing. Proident est sunt amet ipsum magna proident fugiat deserunt mollit officia magna ea pariatur. Ullamco proident in nostrud pariatur. Minim consequat pariatur id pariatur adipisicing.',
-    category: 'roll and write',
+    category: 'roll-and-write',
     created_at: new Date(1600010368077),
     votes: 8
   },
@@ -246,7 +246,7 @@ module.exports = [
       'https://images.pexels.com/photos/278918/pexels-photo-278918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       "The title translates to \"that's so clever\" and it won't take you long to realise why. Ganz Schon Clever is a really engagind roll-and-write where you'll try to collect score points from coloured dice. Sounds simple, but the real strategy of this game lies in how you collect the bonuses.",
-    category: 'roll and write',
+    category: 'roll-and-write',
     created_at: new Date(1600010368077),
     votes: 8
   },
@@ -258,7 +258,7 @@ module.exports = [
       'https://images.pexels.com/photos/33968/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Often thought of as the ultimate roll-and-write game, You\'ll find it hard to overlook Yahtzee\'s appeal. Yahtzee is quick to teach and quick to play. Think of it as an essential "palate-cleanser" game to have in your store cupboard for those times when chunkier games leave a bitter taste in players mouths.',
-    category: 'roll and write',
+    category: 'roll-and-write',
     created_at: new Date(1600010360077),
     votes: 18
   },
@@ -270,7 +270,7 @@ module.exports = [
       'https://images.pexels.com/photos/2416463/pexels-photo-2416463.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       'Escape the Dark Castle is a cooperative board game than will bring back feelings of eighties nostalgia. Released in 2017, its already well on its way to being a cult classic. Filled with dark traps, dungeons and monsterous foes the aim of the game is simple, escape!',
-    category: 'push your luck',
+    category: 'push-your-luck',
     created_at: new Date(1610964545410),
     votes: 18
   },
@@ -282,7 +282,7 @@ module.exports = [
       'https://images.pexels.com/photos/596132/pexels-photo-596132.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     review_body:
       "Argueably one of the best things to come out of 2020, and new addition to what will hopefully become more than a two part series. Escape the Dark Sector takes everything about Escape the Dark Castle that made it wonderful, and then adds guns! Thrust into the future by the imersive chapter cards, your mission remains the same, (thats right, escape!) but the challenges you'll face feel a whole lot more grown up. Cooperative and atmospheric, Escape the Dark Sector brings more variety and a bigger challenge to players. Don't underestimate the dabger of running out of ammo.",
-    category: 'push your luck',
+    category: 'push-your-luck',
     created_at: new Date(1610964545610),
     votes: 11
   }
